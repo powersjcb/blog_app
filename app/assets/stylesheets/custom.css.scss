@@ -19,6 +19,7 @@ textarea {
   text-align: center;
 }
 
+
 .center h1 {
   margin-bottom: 10px;
 }
@@ -82,31 +83,28 @@ footer {
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
   color: #777
-}
+  a {
+    color: #555;
+  }
 
-
-footer a {
-  color: #555;
-}
-
-footer a:hover {
+  a:hover {
   color: #222;
-}
+  }
 
-footer small {
+  small {
   float: left;
-}
+  }
 
-footer ul {
+  ul {
   float: right;
   list-style: none;
-}
+  }
 
-footer ul li {
+  ul li {
   float: left;
   margin-left: 15px;
+  }
 }
-
 
 
 
