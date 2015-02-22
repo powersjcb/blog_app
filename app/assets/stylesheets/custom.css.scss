@@ -49,7 +49,7 @@ h1 {
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
-  tet-align: center;
+  text-align: center;
 }
 
 
@@ -76,7 +76,7 @@ P {
   margin-right: 10px;
   font-size: 1.7em;
   color: #fff;
-  text-transofrm: uppercase;
+  text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
@@ -167,6 +167,36 @@ aside {
   margin-top: 15px;
 }
 
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 2px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+
+#error_explanation {
+  color: red;
+  u1 {
+  color: red;
+  margin: 0 0 30 px 0;
+  }
+}
+
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
 
 
 
