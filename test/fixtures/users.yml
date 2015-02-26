@@ -15,5 +15,5 @@
 
 jacob:
   name: Jacob Powers
-  email: powersjcb@gmail.com
+  email: test@testingonly.com
   password_digest: <%= User.digest('password') %>
