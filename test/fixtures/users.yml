@@ -17,6 +17,7 @@ jacob:
   name: Jacob Powers
   email: test@testingonly.com
   password_digest: <%= User.digest('password') %>
+  admin: true
 
 archer:
   name: Sterling archer
