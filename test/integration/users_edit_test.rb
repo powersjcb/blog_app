@@ -37,7 +37,13 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     @user.reload
     assert_equal @user.name, name
     assert_equal @user.email, email
+  end
 
+  test "forwarding only forwards to the given URL the first time" do
+    # get user_path(@user)
+    # # assert_redirected_to login_path
+    # # log_in_as(@user)
+    # # assert_redirected_to @user
   end
 
 end

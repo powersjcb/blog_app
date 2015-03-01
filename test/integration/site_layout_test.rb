@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class SiteLayoutTest < ActionDispatch::IntegrationTest
-  test "layout links" do
-    
+  
+  def setup
+    @user = users(:jacob)
+  end
+
+  test "layout links while logged out" do  
     get root_path
     assert_template 'static_pages/home'
     assert_select "a[href=?]", root_path, count: 2
@@ -12,5 +16,15 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     
     get signup_path
     assert_select "title", full_title("Sign up")
+  end
+
+
+  test "layout links while logged in" do
+    log_in_as(@user)
+    get root_path
+    assert_select "a[href=?]", user_path(@user)
+    assert_select "a[href=?]", logout_path
+    assert_select "a[href=?]", edit_user_path(@user)
+    assert_select "a[href=?]", users_path
   end
 end
