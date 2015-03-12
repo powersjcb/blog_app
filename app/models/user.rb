@@ -2,13 +2,19 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  name            :string
-#  email           :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  password_digest :string
-#  remember_digest :string
+#  id                :integer          not null, primary key
+#  name              :string
+#  email             :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  password_digest   :string
+#  remember_digest   :string
+#  admin             :boolean          default("f")
+#  activation_digest :string
+#  activated         :boolean          default("f")
+#  activated_at      :datetime
+#  reset_digest      :string
+#  reset_sent_at     :datetime
 #
 
 class User < ActiveRecord::Base
@@ -73,8 +79,7 @@ class User < ActiveRecord::Base
 
   # Activate an account.
   def activate
-    update_attribute(:activated, true)
-    update_attribute(:activated_at, Time.zone.now)
+    update_columns( activated: true, activated_at: Time.zone.now )
   end
 
   # Send activation email.
@@ -85,8 +90,8 @@ class User < ActiveRecord::Base
   # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token
-    update_attribute(:reset_digest, User.digest(reset_token))
-    update_attribute(:reset_sent_at, Time.zone.now)
+    update_columns(reset_digest:  User.digest(reset_token),
+                   reset_sent_at: Time.zone.now )
   end
 
   # Sends password reset email.
