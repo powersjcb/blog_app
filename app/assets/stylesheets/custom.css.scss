@@ -294,6 +294,7 @@ input {
   .content {
     display: block;
     margin-left: 60px;
+    word-wrap: break-word;
   }
   .gravatar {
     float: left;
