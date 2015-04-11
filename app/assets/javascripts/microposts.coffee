@@ -21,3 +21,4 @@ $(document).ready ->
     $('.counter').toggleClass('error', remaining < 10);
     #submit button toggle when invalid inputs
     $('.btn-primary').prop('disabled', remaining < 0 || remaining == 140);
+    
