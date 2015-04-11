@@ -266,10 +266,12 @@ input {
 
 .users {
   list-style: none;
-  margin: 0;
+  margin: 5px;
+  padding: 15px;
   li {
     overflow: auto;
     padding: 10px 0;
+    padding-left: 20px;
     border-bottom: 1px solid $gray-lighter;
   }
 }
@@ -314,19 +316,29 @@ aside {
   }
 }
 
-.profile-card {
+.profile-card, .feed-card {
   padding-top: 10px;
-}
-
-
-.feed-card, .profile-card {
-  background: #FFF;
-  border-radius: 6px;
   margin-right: 10px;
 }
 
+/* white backgrounds */
+.feed-card, .profile-card, .users, .help {
+  background: #FFF;
+  border-radius: 6px;
+}
+
+.jumbotron {
+  background-color: #FFF;
+}
 
 
+
+.help {
+  padding-right: 5px;
+  padding-left: 25px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
 
 
 .warning {
