@@ -18,8 +18,11 @@ class Micropost < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 140 }
   validate  :picture_size
 
-  has_many :favorites,  dependent: :destroy
-  has_many :retweets,   dependent: :destroy
+
+
+
+  has_many :favorites, dependent: :destroy
+  has_many :retweets,  dependent: :destroy
 
   private
     # Validates the size of an uploaded picture.
