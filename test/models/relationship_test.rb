@@ -31,9 +31,9 @@ class RelationshipTest < ActiveSupport::TestCase
     assert_not @relationship.valid?
   end
 
-  # test "should not have the same ids" do
-  #   @relationship.follower_id = 2
-  #   assert_not @relationship.valid?
-  # end
+  test "should not have the same ids" do
+    @relationship.follower_id = 2
+    assert_not @relationship.valid?
+  end
 
 end

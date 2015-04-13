@@ -21,8 +21,12 @@ class Retweet < ActiveRecord::Base
 
   private
     def cant_retweet_yourself
-      if user_id == Micropost.find_by(id: micropost_id).user_id
-        errors.add(:user_id, "can't retweet self")
+      if Micropost.exists?(micropost_id)
+        if user_id == Micropost.find_by(id: micropost_id).user_id
+          errors.add(:user_id, "can't retweet self")
+        end
+      else
+        errors.add(:micropost_id, "can't find micropost")
       end
     end
 end
