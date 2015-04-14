@@ -104,6 +104,21 @@ class User < ActiveRecord::Base
 
 
 
+  def favorite(micropost)
+    micropost.favorites.create(user_id: self.id)
+  end
+
+  def unfavorite(micropost)
+    favorites.find_by(user_id: self.id, micropost_id: micropost.id).destroy
+  end
+
+  def retweet(micropost)
+    micropost.retweets.create(user_id: self.id)
+  end
+
+
+
+
   # Returns true if current user is following another user.
   def following?(other_user)
     following.include?(other_user)
