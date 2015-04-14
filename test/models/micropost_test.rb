@@ -21,7 +21,7 @@ class MicropostTest < ActiveSupport::TestCase
   end
 
 
-  test "should be valid" do
+  test "is valid" do
     assert @micropost.valid?    
   end
 
