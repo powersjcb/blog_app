@@ -18,11 +18,10 @@ class Micropost < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 140 }
   validate  :picture_size
 
-
-
-
   has_many :favorites, dependent: :destroy
   has_many :retweets,  dependent: :destroy
+
+  after_create :create_activity
 
   private
     # Validates the size of an uploaded picture.
@@ -31,4 +30,13 @@ class Micropost < ActiveRecord::Base
         errors.add(:picture, "should be less than 5MB")
       end
     end
+
+    def create_activity
+      Activity.create(
+        subject: self,
+        user: user
+        )
+    end
+
+
 end

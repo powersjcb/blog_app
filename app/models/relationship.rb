@@ -16,6 +16,8 @@ class Relationship < ActiveRecord::Base
   validates :follower_id, presence: true 
   validates :followed_id, presence: true
   validate :cant_follow_yourself
+  
+  after_create :create_activities
 
 
   private
@@ -23,5 +25,25 @@ class Relationship < ActiveRecord::Base
       if follower_id == followed_id
         errors.add(:followed_id, "can't follow yourself")
       end
+    end
+
+
+    def create_activities
+      started_following
+      was_followed
+    end
+
+    def started_following
+      Activity.create(
+        subject: self,
+        user: user   #user doing the following
+        )
+    end
+
+    def was_followed
+      Activity.create(
+        subject: self,
+        user: micropost.user_id  #user being favorited
+        )
     end
 end
