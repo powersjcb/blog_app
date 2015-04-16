@@ -9,8 +9,8 @@
       </div>
     <% end %>
   </span>
-  <span class="glyphicon glyphicon-retweet retweet" aria-hidden='true'></span>
-  <span class="glyphicon glyphicon-star favorite" aria-hidden='true'></span>
+    <a href="#"><span class="glyphicon glyphicon-retweet retweet" aria-hidden='true'></span></a>
+    <a href="#"><span class="glyphicon glyphicon-star favorite" aria-hidden='true'></span></a>
   <span class="timestamp">
     <%= time_ago_in_words(micropost.created_at) %> ago
     <% if current_user?(micropost.user) %>

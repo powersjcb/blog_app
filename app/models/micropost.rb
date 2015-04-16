@@ -19,10 +19,9 @@ class Micropost < ActiveRecord::Base
   validate  :picture_size
 
   has_many :favorites, dependent: :destroy
-  has_many :retweets, through: :retweet_relationships, source: :micropost
 
 
-  has_many :retweet_relationships,  dependent: :destroy
+  has_many :retweet_relationships, class_name: "Retweet", dependent: :destroy
   has_many :retweets, through: :retweet_relationships, source: :micropost
 
 
