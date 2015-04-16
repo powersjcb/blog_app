@@ -1,14 +1,15 @@
 class FavoritesController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:update]
 
-  def create
-    @micropost = Micropost.find(params[:])
-    current_user.favorites(@micropost)
-    
+  def update
+    @micropost = Micropost.find(params[:micropost_id])
+    current_user.favorite(@micropost)
+    if request.xhr?
+      head :ok
+    else
+      render 'static_pages/home'
+    end  
   end
 
-
-  def destroy
-
-  end
+  private
 end

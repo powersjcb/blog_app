@@ -9,8 +9,24 @@
       </div>
     <% end %>
   </span>
-    <a href="#"><span class="glyphicon glyphicon-retweet retweet" aria-hidden='true'></span></a>
-    <a href="#"><span class="glyphicon glyphicon-star favorite" aria-hidden='true'></span></a>
+
+    <a href="#" class="no-boot-ul">
+      <span class="glyphicon glyphicon-retweet retweet" aria-hidden='true'></span>
+      <span class="retweet rt-count"><%= micropost.retweets.count %></span>
+    </a>
+
+    <a href="#" class="no-boot-ul">
+      <span class="glyphicon glyphicon-star favorite" aria-hidden='true'></span>
+      <span class="favorite fav-count"><%= micropost.favorites.count %></span>
+    </a>
+
+    <%= form_for Favorite.new, remote: true, :url => {:controller => :favorites,
+                                    action: :update} do |f| %>
+      <div><%= hidden_field_tag :micropost_id, micropost.id %></div>
+      <%= f.submit %>
+    <% end %>
+
+
   <span class="timestamp">
     <%= time_ago_in_words(micropost.created_at) %> ago
     <% if current_user?(micropost.user) %>

@@ -22,8 +22,10 @@ class MicropostsController < ApplicationController
   end
 
 
+
+
   # def favorited
-  #   @micropost.favorites.map {|post| post.user }
+    # @micropost.favorites.map {|post| post.user }
   # end
 
   # def retweeted

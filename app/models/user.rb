@@ -110,15 +110,20 @@ class User < ActiveRecord::Base
     active_relationships.find_by( followed_id: other_user.id).destroy
   end
 
-
-
   def favorite(micropost)
-    micropost.favorites.create(user_id: self.id)
+    if !self.favorited?(micropost)
+      micropost.favorites.create(user_id: self.id)
+    else
+      Favorite.find_by(user_id: self.id,
+             micropost_id: micropost.id).destroy
+    end
   end
 
-  def unfavorite(micropost)
-    favorites.find_by(user_id: self.id, micropost_id: micropost.id).destroy
+  def favorited?(micropost)
+    Favorite.exists?(user_id: self.id, micropost_id: micropost.id)
   end
+
+
 
   def retweet(micropost)
     micropost.retweets.create(user_id: self.id)
