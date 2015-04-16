@@ -32,9 +32,15 @@ class User < ActiveRecord::Base
 
 
   has_many :favorites, dependent: :destroy
-  has_many :retweets, dependent: :destroy
+  
+  has_many :retweet_relationships, class_name: "Retweet", dependent: :destroy
+  has_many :retweeted, through: :retweet_relationships, source: :micropost
 
-  has_many :activities
+  has_many :activities, dependent: :destroy
+  has_many :feed_items, through: :activities, source: :subject, source_type: "Micropost"
+  has_many :followed_feeds, through: :active_relationships, source: :feed_items, source_type: "Micropost"
+ 
+
 
 
 
@@ -90,7 +96,7 @@ class User < ActiveRecord::Base
     following_ids = "SELECT followed_id FROM relationships
                       WHERE follower_id = :user_id"
 
-    Micropost.where("user_id IN (#{following_ids})
+    Micropost.joins(:user).where("user_id IN (#{following_ids})
                       OR user_id = :user_id", user_id: id)
   end
 

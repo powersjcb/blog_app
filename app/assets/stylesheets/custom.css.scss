@@ -169,6 +169,21 @@ aside {
   }
 }
 
+.glyphicon {
+  color: #ccd6dd;
+  font-size: 15px;
+  margin-left: 20px;
+  margin-right: 15px;
+}
+
+
+.retweeted, .retweet:hover {
+  color: #0084b4 !important;
+}
+.favorited, .favorite:hover {
+  color: #ffac33;
+}
+
 .gravatar {
   float: left;
   margin-right: 10px;

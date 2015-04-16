@@ -17,7 +17,7 @@ class Relationship < ActiveRecord::Base
   validates :followed_id, presence: true
   validate :cant_follow_yourself
   
-  after_create :create_activities
+  # after_create :create_activities
 
 
   private
@@ -28,22 +28,22 @@ class Relationship < ActiveRecord::Base
     end
 
 
-    def create_activities
-      started_following
-      was_followed
-    end
+    # def create_activities
+    #   started_following
+    #   # was_followed
+    # end
 
-    def started_following
-      Activity.create(
-        subject: self,
-        user: user   #user doing the following
-        )
-    end
+    # def started_following
+    #   Activity.create(
+    #     subject: self,
+    #     user: follower   #user doing the following
+    #     )
+    # end
 
-    def was_followed
-      Activity.create(
-        subject: self,
-        user: micropost.user_id  #user being favorited
-        )
-    end
+    # def was_followed
+    #   Activity.create(
+    #     subject: self,
+    #     user: micropost.user_id  #user being favorited
+    #     )
+    # end
 end
