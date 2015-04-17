@@ -16,8 +16,9 @@ class Retweet < ActiveRecord::Base
   default_scope -> { order(created_at: :desc) }
   validates :micropost_id, presence: true
   validates :user_id, presence: true
-
   validate :cant_retweet_yourself
+
+  after_create :create_activity
 
   private
     def cant_retweet_yourself
@@ -29,4 +30,12 @@ class Retweet < ActiveRecord::Base
         errors.add(:micropost_id, "can't find micropost")
       end
     end
+
+    def create_activity
+      Activity.create(
+        subject: self,
+        user: user
+        )
+    end
+
 end

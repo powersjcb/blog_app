@@ -169,6 +169,45 @@ aside {
   }
 }
 
+
+/* Favorites and retweets */
+
+.glyphicon {
+  color: #ccd6dd;
+  font-size: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.retweet {
+  color: #ccd6dd;
+}
+.favorite {
+  color: #ccd6dd;
+}
+
+.fav-count {
+  margin-right: 15px
+}
+
+.rt-count {
+
+}
+
+
+.retweeted, .retweet:hover {
+  color: #5c913b !important;
+  cursor: pointer;
+}
+.favorited, .favorite:hover {
+  color: #ffac33;
+  cursor: pointer;
+}
+
+
+
+
+
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -304,6 +343,7 @@ input {
     margin-top: 5px;
   }
   .picture {
+    display: block;
     margin-top: 15px;
     margin-bottom: 15px;
   }

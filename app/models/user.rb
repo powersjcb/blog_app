@@ -32,7 +32,15 @@ class User < ActiveRecord::Base
 
 
   has_many :favorites, dependent: :destroy
-  has_many :retweets, dependent: :destroy
+  
+  has_many :retweet_relationships, class_name: "Retweet", dependent: :destroy
+  has_many :retweeted, through: :retweet_relationships, source: :micropost
+
+  has_many :activities, dependent: :destroy
+  has_many :feed_items, through: :activities, source: :subject, source_type: "Micropost"
+  has_many :followed_feeds, through: :active_relationships, source: :feed_items, source_type: "Micropost"
+ 
+
 
 
 
@@ -88,7 +96,7 @@ class User < ActiveRecord::Base
     following_ids = "SELECT followed_id FROM relationships
                       WHERE follower_id = :user_id"
 
-    Micropost.where("user_id IN (#{following_ids})
+    Micropost.joins(:user).where("user_id IN (#{following_ids})
                       OR user_id = :user_id", user_id: id)
   end
 
@@ -102,20 +110,32 @@ class User < ActiveRecord::Base
     active_relationships.find_by( followed_id: other_user.id).destroy
   end
 
-
-
   def favorite(micropost)
-    micropost.favorites.create(user_id: self.id)
+    if !self.favorited?(micropost)
+      micropost.favorites.create(user_id: self.id)
+    else
+      Favorite.find_by(user_id: self.id,
+             micropost_id: micropost.id).destroy
+    end
   end
 
-  def unfavorite(micropost)
-    favorites.find_by(user_id: self.id, micropost_id: micropost.id).destroy
+  def favorited?(micropost)
+    Favorite.exists?(user_id: self.id, micropost_id: micropost.id)
   end
+
+
 
   def retweet(micropost)
-    micropost.retweets.create(user_id: self.id)
+    if !self.retweeted?(micropost)
+      Retweet.create(user_id: self.id, micropost_id: micropost.id)
+    else
+      Retweet.find_by(user_id: self.id, micropost_id: micropost.id).destroy
+    end
   end
 
+  def retweeted?(micropost)
+    Retweet.exists?(user_id: self.id, micropost_id: micropost.id)
+  end
 
 
 
