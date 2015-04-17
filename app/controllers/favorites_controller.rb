@@ -4,12 +4,9 @@ class FavoritesController < ApplicationController
   def update
     @micropost = Micropost.find(params[:micropost_id])
     current_user.favorite(@micropost)
-    if request.xhr?
-      head :ok
-    else
-      render 'static_pages/home'
-    end  
+    respond_to do |format|
+      format.html { redirect_to "/static_pages/home"}
+      format.js
+    end 
   end
-
-  private
 end

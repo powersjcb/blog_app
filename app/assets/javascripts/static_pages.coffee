@@ -10,9 +10,12 @@ isBreakPoint = ( alias ) ->
 toggleLogoFloat = () ->
   $('#logo').toggleClass('logo_float', !(isBreakPoint('xs')) )
 
-$(document).ready ->
+$(document).on 'page:change', ->
+  
+
+  # Resize formatting
   toggleLogoFloat()
-  # on window resize with timeout
+    # on window resize with timeout
   $(window).bind 'resize', (e) ->
     window.resizeEvt
     $(window).resize ->
@@ -21,6 +24,31 @@ $(document).ready ->
       toggleLogoFloat
       ), 150)
     
+
+  # retweet & favorite handler
+  $('.rt-select, .fav-select').on "click", ->
+    selected = $(this).attr("id")
+    selected_type = selected.split('-').shift()
+    selected_id = selected.split('-').pop()
+
+    # console.log(selected)
+    if selected_type is "rt"
+      $( "#retweet-" + selected_id ).submit()
+    else if selected_type is "fav"
+      $( "#favorite-" + selected_id ).submit()
+    else
+      console.log("error")
+
+      
+
+
+
+
+
+
+
+
+
 
 
 

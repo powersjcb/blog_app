@@ -10,20 +10,27 @@
     <% end %>
   </span>
 
-    <a href="#" class="no-boot-ul">
+    <span class="rt-select" id=rt-<%= micropost.id %>>
       <span class="glyphicon glyphicon-retweet retweet" aria-hidden='true'></span>
       <span class="retweet rt-count"><%= micropost.retweets.count %></span>
-    </a>
+    </span>
 
-    <a href="#" class="no-boot-ul">
+    <span class="fav-select" id=fav-<%= micropost.id %> >
       <span class="glyphicon glyphicon-star favorite" aria-hidden='true'></span>
       <span class="favorite fav-count"><%= micropost.favorites.count %></span>
-    </a>
+    </span>
+
+
+    <%= form_for Retweet.new, remote: true, 
+        :url => {:controller => :retweets, action: :update },
+        :html => { :id => "retweet-#{micropost.id}" } do |f| %>
+        
+      <div><%= hidden_field_tag :micropost_id, micropost.id %></div>
+    <% end %>
 
     <%= form_for Favorite.new, remote: true, :url => {:controller => :favorites,
-                                    action: :update} do |f| %>
+          action: :update }, :html => { :id => "favorite-#{micropost.id}" } do |f| %>
       <div><%= hidden_field_tag :micropost_id, micropost.id %></div>
-      <%= f.submit %>
     <% end %>
 
 
