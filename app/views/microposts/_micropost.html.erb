@@ -11,13 +11,13 @@
   </span>
 
     <span class="rt-select" id=rt-<%= micropost.id %>>
-      <span class="glyphicon glyphicon-retweet retweet" aria-hidden='true'></span>
-      <span class="retweet rt-count"><%= micropost.retweets.count %></span>
+      <span class="glyphicon glyphicon-retweet retweet<%= micropost.retweets.count > 0 ? " retweeted" : "" %>" aria-hidden='true'></span>
+      <span class="retweet rt-count<%= micropost.retweets.count > 0 ? " retweeted" : ""%>"><%= micropost.retweets.count %></span>
     </span>
 
     <span class="fav-select" id=fav-<%= micropost.id %> >
-      <span class="glyphicon glyphicon-star favorite" aria-hidden='true'></span>
-      <span class="favorite fav-count"><%= micropost.favorites.count %></span>
+      <span class="glyphicon glyphicon-star favorite<%= micropost.favorites.count > 0 ? " favorited" : "" %>" aria-hidden='true'></span>
+      <span class="favorite fav-count<%= micropost.favorites.count > 0 ? " favorited" : "" %>"><%= micropost.favorites.count %></span>
     </span>
 
 

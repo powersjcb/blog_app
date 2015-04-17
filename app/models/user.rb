@@ -126,7 +126,7 @@ class User < ActiveRecord::Base
 
 
   def retweet(micropost)
-    micropost.retweets.create(user_id: self.id)
+    Retweet.create(user_id: self.id, micropost_id: micropost.id)
   end
 
 
