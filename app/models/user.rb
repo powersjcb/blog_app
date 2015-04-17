@@ -126,9 +126,16 @@ class User < ActiveRecord::Base
 
 
   def retweet(micropost)
-    Retweet.create(user_id: self.id, micropost_id: micropost.id)
+    if !self.retweeted?(micropost)
+      Retweet.create(user_id: self.id, micropost_id: micropost.id)
+    else
+      Retweet.find_by(user_id: self.id, micropost_id: micropost.id).destroy
+    end
   end
 
+  def retweeted?(micropost)
+    Retweet.exists?(user_id: self.id, micropost_id: micropost.id)
+  end
 
 
 
