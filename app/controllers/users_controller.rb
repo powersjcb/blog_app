@@ -25,11 +25,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # def favorites
-  #   @title = "Favorites"
-  #   @user = User.find(params[:id])
-  #   @favorites = @user.favorites.map { |fav| fav.micropost }.paginate(page: params[:page])
-  # end
+  def favorites
+    @title = "Favorites"
+    @user = User.find(params[:id])
+    @favorites = @user.favorites.paginate(page: params[:page])
+  end
 
   # def retweets
   #   @title = ""
