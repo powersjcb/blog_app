@@ -38,7 +38,6 @@ class User < ActiveRecord::Base
 
   has_many :activities, dependent: :destroy
   has_many :feed_items, through: :activities, source: :subject, source_type: "Micropost"
-  has_many :followed_feeds, through: :active_relationships, source: :feed_items, source_type: "Micropost"
 
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
@@ -94,6 +93,15 @@ class User < ActiveRecord::Base
     Micropost.joins(:user).where("user_id IN (#{following_ids})
                       OR user_id = :user_id", user_id: id)
   end
+
+  def active_feed
+    following_ids = "SELECT followed_id FROM relationships
+                      WHERE follower_id = :user_id"
+    
+    Activity.where("user_id IN (#{following_ids})
+                      OR user_id = :user_id", user_id: id)
+  end
+
 
   # Follows a user.
   def follow(other_user)

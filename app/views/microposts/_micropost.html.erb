@@ -1,6 +1,13 @@
 <li id="micropost-<%= micropost.id %>">
+  <% user = false %>
+  <% if user != false %>
+    <span class="retweeter"><%= link_to user.name, user %> retweeted</span>
+  <% end %>
+
+
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+
   <span class="content">
     <%= micropost.content %>
     <% if micropost.picture? %>

@@ -19,6 +19,7 @@ class Retweet < ActiveRecord::Base
   validate :cant_retweet_yourself
 
   after_create :create_activity
+  after_destroy :destroy_activity
 
   private
     def cant_retweet_yourself
@@ -38,4 +39,10 @@ class Retweet < ActiveRecord::Base
         )
     end
 
+    def destroy_activity
+      Activity.find_by(
+        subject: self,
+        user: user
+        ).destroy
+    end
 end
