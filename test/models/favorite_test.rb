@@ -17,8 +17,7 @@ class FavoriteTest < ActiveSupport::TestCase
   def setup
     @user  = users(:jacob)
     @other = users(:archer)
-    @favorite = @user.favorites.new(user_id: 1, 
-                              micropost_id: @other.microposts.first.id )
+    @favorite = @user.favorite(@other.microposts.first )
   end
 
   test "is valid" do

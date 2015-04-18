@@ -39,11 +39,6 @@ class User < ActiveRecord::Base
   has_many :activities, dependent: :destroy
   has_many :feed_items, through: :activities, source: :subject, source_type: "Micropost"
   has_many :followed_feeds, through: :active_relationships, source: :feed_items, source_type: "Micropost"
- 
-
-
-
-
 
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
@@ -63,8 +58,8 @@ class User < ActiveRecord::Base
     :email, 
       presence: true,
       length: { maximum: 255 },
-      format: {with: VALID_EMAIL_REGEX},
-      uniqueness: {case_sensitive: false}
+      format: { with: VALID_EMAIL_REGEX },
+      uniqueness: { case_sensitive: false }
   )
 
 
