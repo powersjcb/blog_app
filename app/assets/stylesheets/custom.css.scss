@@ -179,6 +179,27 @@ aside {
   margin-right: 10px;
 }
 
+.retweeted-glyph {
+  font-size: 10px;
+  color: white;
+  background: #5c913b;
+  border: solid;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 3px;
+  padding-right: 3px;
+  border-radius: 4px;
+  margin-left: 33px;
+  margin-right: 4px
+
+}
+
+.retweeter {
+  display: float;
+  color: #8899a6;
+}
+
+
 .retweet {
   color: #ccd6dd;
 }
@@ -202,6 +223,11 @@ aside {
 .favorited, .favorite:hover {
   color: #ffac33;
   cursor: pointer;
+}
+
+.tweet-actions {
+  display: inline-block;
+  margin-left: 20px
 }
 
 

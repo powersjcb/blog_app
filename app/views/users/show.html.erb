@@ -13,12 +13,9 @@
   </aside>
   <div class="col-md-6 feed-card">
     <%= render 'follow_form' if logged_in? %>
-    <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
-      <o1 class="microposts">
-        <%= render @microposts %>
-      </o1>
-      <%= will_paginate @microposts %>
+    <% if Activity.where(user_id: @user.id).any? %>
+      <h3>Microposts (<%= @activities.count %>)</h3>
+      <%= render 'shared/feed' %>
     <% end %>
   </div>
 </div>

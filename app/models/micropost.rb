@@ -26,6 +26,7 @@ class Micropost < ActiveRecord::Base
 
 
   after_create :create_activity
+  after_destroy :destroy_activity
 
   private
     # Validates the size of an uploaded picture.
@@ -42,5 +43,11 @@ class Micropost < ActiveRecord::Base
         )
     end
 
+    def destroy_activity
+      Activity.find_by(
+        subject: self,
+        user: user
+        ).destroy
+    end
 
 end

@@ -1,6 +1,18 @@
-<% if @feed_items.any? %>
-   <ol class="microposts">
-     <%= render @feed_items %>
-   </ol>
-   <%= will_paginate @feed_items %>
+<% if @activities.any? %>
+  <ol class="microposts">
+    <% for activity in @activities %>
+      <% if activity.subject_type == "Micropost" %>
+        <%= render partial: 'microposts/micropost',
+                      locals: { micropost: activity.subject,
+                                user: false} %>
+      <% elsif activity.subject_type == "Retweet" %>
+        <%= render partial: 'microposts/micropost', 
+                      locals: { micropost: activity.subject.micropost,
+                                user: activity.subject.user
+                              } %>
+      <% else %>
+      <% end %>
+    <% end %>
+  </ol>
+  <%= will_paginate @activities %>
 <% end %>
